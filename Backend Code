@@ -1,0 +1,44 @@
+import pygame
+
+#Initialise Pygame
+pygame.init()
+
+#Screen Resolutions
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+PLAYER_SIZE = 50
+PLAYER_SPEED = 5
+
+#Colours
+WHITE = (255, 255, 255)
+
+#Creating the Screen
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Game Project")
+
+#Creating the Player
+player = pygame.Rect(50, SCREEN_HEIGHT // 2 - PLAYER_SIZE // 2, PLAYER_SIZE, PLAYER_SIZE)
+
+#Main Game Loop
+running = True
+clock = pygame.time.Clock()
+
+while True:
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        sys.exit()
+
+  keys = pygame.key.get_pressed()
+  if keys[pygame.K_LEFT] and player.top > 0:
+      player.y -= PLAYER_SPEED
+  if keys[pygame.K_DOWN] and player.bottom < SCREEN_HEIGHT:
+      player.y += PLAYER_SPEED
+
+#Updating the Screen
+screen.fill = (WHITE)
+pygame.draw.rect(screen, (0, 0, 255), player)
+pygame.display.flip()
+
+#Capping the framerate
+clock.tick(60)
